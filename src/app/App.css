@@ -1,8 +1,10 @@
 .App {
   display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  background: lightblue;
 }
 
-/* TODO: remove **/
-img {
-  margin: 50px auto;
+.App main {
+  overflow: auto;
 }
