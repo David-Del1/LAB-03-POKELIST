@@ -1,0 +1,25 @@
+.PokeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: beige;
+  margin: 1rem;
+  padding: 0.6rem;
+  box-shadow: 0px 0px 5px 0px black;
+  transition: all ease-in-out 100;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+}
+
+.PokeItem:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 0px 0px 0px black;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+img {
+  width: 200px;
+}

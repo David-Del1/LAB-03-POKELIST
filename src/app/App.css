@@ -9,6 +9,7 @@
   height: 100vh;
   grid-template-rows: auto 1fr auto;
   background: lightblue;
+  overflow: auto;
 }
 
 .App main {

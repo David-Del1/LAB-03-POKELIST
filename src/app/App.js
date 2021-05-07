@@ -10,44 +10,52 @@ const POKEDEX_API = 'https://pokedex-alchemy.herokuapp.com/api/pokedex';
 
 class App extends Component {
   state = {
-    pokemon: []
+    pokemon: [],
+    loading: true,
+    search: this.state,
+    sort: undefined
   }
 
-  // handleSearch = ({ search }) => {
-  //   this.setState(
-  //     { search: search, page: 1 },
-  //     () => this.fetchPokemon()
-  //   );
-  // }
-
-  async componentDidMount() {
-    const response = await request.get(POKEDEX_API);
-    this.setState({ pokemon: response.body.results });
+  componentDidMount() {
+    this.fetchPokemon();
   }
 
-  // async fetchPokemon() {
-  //   const { search, page } = this.state;
+  async fetchPokemon() {
+    const { search, sort } = this.state;
 
-  //   this.setState({ loading: true });
+    this.setState({ loading: true });
 
-  //   try {
-  //     const response = await request
-  //       .get(POKEDEX_API)
-  //       .query({ name: search })
-  //       .query({ page: page });
+    try {
+      const response = await request
+        .get(POKEDEX_API)
+        .query({ pokemon: search })
+        .query({ sort: sort || undefined })
+        .query({ direction: 'asc' });
 
-  //     this.setState({ 
-  //       pokedex: response.body
-  //     });
+      this.setState({ 
+        pokemon: response.body.results
+      });
 
-  //   } catch (ERROR) {
-  //     console.log(ERROR);
-  //   } finally {
-  //     this.setState ({
-  //       pokedex : []
-  //     });
-  //   }
-  // }
+    } catch (ERROR) {
+      console.log(ERROR);
+    } finally {
+      this.setState ({
+        pokedex : []
+      });
+    }
+  }
+
+  handleSearch = ({ search, sort }) => {
+    console.log(search, sort);
+    this.setState(
+      { search: search,
+        sort: sort },
+      () => this.fetchPokemon()
+    );
+
+    
+
+  }
 
   render() {
     const { pokemon } = this.state;
@@ -56,13 +64,15 @@ class App extends Component {
       <div className="App">
 
         <Header/>
-        <PokeList pokemon={pokemon}/>
+        
 
         <section className="search-bar">
           <Search onSearch={this.handleSearch}/>
         </section>
 
         <main>
+          {pokemon && (pokemon.length ? <PokeList pokemon={pokemon}/>
+            : <p>Sorry no Pokemon!</p>)}
           
         </main>
       

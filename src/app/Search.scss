@@ -3,6 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  select {
+    width: 150px;
+    height: 36px;
+    flex-grow: 1;
+  }
 }
 
 input {
@@ -10,10 +16,12 @@ input {
   height: 30px;
   outline: none;
   flex-grow: 2;
+  margin: 1rem;
 }
 
 button {
   height: 36px;
   width: 36px;
   cursor: pointer;
+  margin: 1rem;
 }
